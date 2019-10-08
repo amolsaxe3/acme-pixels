@@ -57,10 +57,10 @@
         <div id='controls'>
             <h2>Controls</h2>
             <form>
-            <button>Add A ROW</button>
-            <button>Remove ROW</button>
-            <button>Add A Column</button>
-            <button>Remove Column</button>
+            <button id='addrow'>Add A ROW</button>
+            <button id='removerow'>Remove ROW</button>
+            <button id='addcolumn'>Add A Column</button>
+            <button id='removecolumn'>Remove Column</button>
             <div id='palette'>
                     <div class="color" style="background-color: red"></div>
                     <div class="color" style="background-color: blue"></div>
@@ -85,12 +85,12 @@ let arrToPass = [
                 [[],[],[],[],[]], 
                 [[],[],[],[],[]]
                 ]
-
+                let gridContainer = document.querySelector('#grid-container')
 const generateHTMLGrid = (arrToPass)=> { 
     //your code here to generate html for a grid
-    let gridContainer = document.querySelector('#grid-container')
+   
     let rows = arrToPass.length;
-    let columns = rows;
+    let columns = arrToPass[0].length;
             for(let i = 0; i < rows; i++){
                 let row = arrToPass[i];
                 const newRow = document.createElement('div')
@@ -98,6 +98,7 @@ const generateHTMLGrid = (arrToPass)=> {
                 for(let j = 0; j < columns; j++){
                     const newCell = document.createElement('div')
                     newCell.setAttribute("id", `${i}${j}`)
+                    newCell.setAttribute("value", 0);
                     newCell.classList.add("cell")
                     // newCell.setAttribute("style", `background-color: ${row[j]};`);
                     newRow.appendChild(newCell)
@@ -106,6 +107,33 @@ const generateHTMLGrid = (arrToPass)=> {
             }
     };
     generateHTMLGrid(arrToPass);
+
+    const addRow = document.getElementById('addrow');
+    const removeRow = document.getElementById('removerow');
+    const addColumn = document.getElementById('addcolumn');
+    const removeColumn = document.getElementById('removecolumn');
+
+    function addingRow(arr) {
+        let add = arr[0].length;
+        let emptyArr = [];
+        for(let i= 0; i < add; i++){
+            emptyArr.push([]); 
+            console.log('emptyArr===>',emptyArr)
+        }
+        console.log('emptyArr after for loop===>',emptyArr)
+        arr.push(emptyArr);
+        console.log('arr after for loop===>',arr)
+
+    }
+     addRow.addEventListener('click',(ev) => {
+         ev.preventDefault();
+         gridContainer.innerHTML = '';
+         addingRow(arrToPass);
+         generateHTMLGrid(arrToPass)
+  
+    })
     
+    
+
 </script>
 </html>
