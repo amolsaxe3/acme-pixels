@@ -1,0 +1,111 @@
+<html>
+<head>
+    <style>
+    body {
+        font-family: 'Chakra Petch', sans-serif;
+        }
+    #container{
+        display: flex;
+        border: 2px solid black;
+
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        }
+    .color {
+        width: 30px;
+        height: 30px;
+        border: 1px solid black;
+    }
+    .selected {
+        border: 2px solid black;
+    }
+    #palette {
+        display: flex;
+        
+    }
+    button {
+        height: 1.75rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    #controls {
+        padding: 20px;
+        background-color: lightgray;
+        flex: 1;
+    }
+    #canvas {
+        padding: 20px; 
+        border: 1px solid black;
+    }
+    .cell {
+        height: 50px;
+        width: 50px;
+        border: 1px solid black;
+    }
+    .row{
+        display: flex;
+        flex-direction: row;
+    }
+    </style>
+</head>
+<body>
+    <h1>Acme Pixels</h1>
+    <div id = 'container'>
+        <div id='controls'>
+            <h2>Controls</h2>
+            <form>
+            <button>Add A ROW</button>
+            <button>Remove ROW</button>
+            <button>Add A Column</button>
+            <button>Remove Column</button>
+            <div id='palette'>
+                    <div class="color" style="background-color: red"></div>
+                    <div class="color" style="background-color: blue"></div>
+                    <div class="color" style="background-color: green"></div>
+                    <div class="color" style="background-color: yellow"></div>
+                    <div class="color" style="background-color: dodgerblue"></div>
+            </div>    
+        </form>
+        </div>
+        <div id ='canvas'>
+            <h2>Canvas</h2>
+            <div id="grid-container"></div>
+        </div>
+    </div>
+</body>
+<script>
+
+let arrToPass = [
+                [[],[],[],[],[]], 
+                [[],[],[],[],[]], 
+                [[],[],[],[],[]], 
+                [[],[],[],[],[]], 
+                [[],[],[],[],[]]
+                ]
+
+const generateHTMLGrid = (arrToPass)=> { 
+    //your code here to generate html for a grid
+    let gridContainer = document.querySelector('#grid-container')
+    let rows = arrToPass.length;
+    let columns = rows;
+            for(let i = 0; i < rows; i++){
+                let row = arrToPass[i];
+                const newRow = document.createElement('div')
+                newRow.classList.add("row")
+                for(let j = 0; j < columns; j++){
+                    const newCell = document.createElement('div')
+                    newCell.setAttribute("id", `${i}${j}`)
+                    newCell.classList.add("cell")
+                    // newCell.setAttribute("style", `background-color: ${row[j]};`);
+                    newRow.appendChild(newCell)
+                }
+                gridContainer.appendChild(newRow)
+            }
+    };
+    generateHTMLGrid(arrToPass);
+    
+</script>
+</html>
